@@ -308,6 +308,8 @@ if __name__ == "__main__":
             # Das Skript muss nach einem Game Over manuell neu gestartet werden,
             # um ein neues Spiel zu beginnen.
 ```
+*******************************************************************************
+
                               {{1-2}}
 *******************************************************************************
 
