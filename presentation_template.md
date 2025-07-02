@@ -70,7 +70,7 @@ comment:  Try to write a short comment about
 
 ## 6. Code (Product)
 
-                              {{1}}
+                              {{1-2}}
 *******************************************************************************
 
 ```python
