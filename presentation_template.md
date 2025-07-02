@@ -309,7 +309,7 @@ if __name__ == "__main__":
             # um ein neues Spiel zu beginnen.
 ```
 
-                              {{2}}
+                              {{1-2}}
 *******************************************************************************
 
   - Important code snippets
