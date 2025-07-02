@@ -413,6 +413,33 @@ def update_game_logic():
 ```
 *******************************************************************************
 
+                              {{6-7}}
+*******************************************************************************
+```python
+if __name__ == "__main__":
+    initialize_game() # Spiel beim Start initialisieren
+
+    while not start:
+        
+        time.sleep(0.1)
+
+    while True:
+        if not game_over:
+            update_game_logic() # Spiellogik aktualisieren
+            draw_game_state()   # Spiel auf Matrix zeichnen
+            time.sleep(GAME_SPEED) # Wartezeit für Spielgeschwindigkeit
+        else:
+            # Spielende-Anzeige (blinkendes Game Over)
+            for x_go in range(MATRIX_WIDTH):
+                for y_go in range(MATRIX_HEIGHT):
+                    display.set_xy((x_go, y_go), COLOR_GAME_OVER if int(time.time() * 2) % 2 == 0 else COLOR_EMPTY)
+            display.show()
+            time.sleep(0.5) # Langsamer blinken
+            # Das Skript muss nach einem Game Over manuell neu gestartet werden,
+            # um ein neues Spiel zu beginnen.
+```
+*******************************************************************************
+
 - What did you already know (and from where do you know it) and what did you have to learn to complete the project?
 
 ## 7. Code (process)
