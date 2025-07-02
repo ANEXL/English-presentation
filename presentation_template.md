@@ -44,7 +44,7 @@ comment:  Try to write a short comment about
 ## 1. Object of desire
 
 <p align="center">
-  <img src="englisch.png" width="900"/>
+  <img src="englisch.png" width="850"/>
 </p>
 
 ## 2. What will audience get out of watching/listening to you? Why should they?
