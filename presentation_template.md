@@ -26,7 +26,7 @@ comment:  Try to write a short comment about
 
   - Big picture
 
-  - Important code snippets
+  - Important code snippet
 
   - Bug examples
 
