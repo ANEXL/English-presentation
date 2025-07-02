@@ -313,19 +313,107 @@ if __name__ == "__main__":
 
                               {{2-3}}
 *******************************************************************************
-
-  - Important code snippets
-
-  - Bug examples
-
-  - What did you already know (and from where do you know it) and what did you have to learn to complete the project?
-
+```python
+def initialize_game():
+    global snake, snake_direction, food_position, game_over, score
+    snake = [(MATRIX_WIDTH // 2, MATRIX_HEIGHT // 2)] # Start in der Mitte
+    snake_direction = (1, 0) # Startet nach rechts
+    food_position = None
+    game_over = False
+    score = 0
+    place_food() # Ersten Apfel platzieren
+    title_screen() # Titelbildschirm anzeigen
+```
 *******************************************************************************
 
                               {{3-4}}
 *******************************************************************************
-  - ersetzung
+```python
+def place_food():
+    """Platziert den Apfel an einer zufälligen, freien Stelle."""
+    global food_position
+    while True:
+        x = random.randint(0, MATRIX_WIDTH - 1)
+        y = random.randint(0, MATRIX_HEIGHT - 1)
+        if (x, y) not in snake: # Stelle darf nicht von Schlange belegt sein
+            food_position = (x, y)
+            break
+```
 *******************************************************************************
+
+                              {{4-5}}
+*******************************************************************************
+```python
+def draw_game_state():
+    """Zeichnet den aktuellen Spielzustand auf die LED-Matrix."""
+    # Zuerst alles leeren
+    for x_clear in range(MATRIX_WIDTH):
+        for y_clear in range(MATRIX_HEIGHT):
+            display.set_xy((x_clear, y_clear), COLOR_EMPTY)
+
+    # Schlange zeichnen
+    for segment in snake:
+        display.set_xy(segment, COLOR_SNAKE)
+
+    # Apfel zeichnen
+    if food_position:
+        display.set_xy(food_position, COLOR_FOOD)
+
+    display.show() # Matrix aktualisieren
+```
+*******************************************************************************
+
+                              {{5-6}}
+*******************************************************************************
+```python
+def update_game_logic():
+    """Aktualisiert die Spiellogik für einen Frame."""
+    global snake, snake_direction, food_position, game_over, score, last_input_direction
+
+    if game_over:
+        return
+
+    # Richtung basierend auf letzter Tasteneingabe anpassen
+    # Verhindert sofortiges 180-Grad-Drehen in sich selbst
+    if last_input_direction == "W" and snake_direction != (0, 1):
+        snake_direction = (0, -1) # Hoch
+    elif last_input_direction == "S" and snake_direction != (0, -1):
+        snake_direction = (0, 1)  # Runter
+    elif last_input_direction == "A" and snake_direction != (1, 0):
+        snake_direction = (-1, 0) # Links
+    elif last_input_direction == "D" and snake_direction != (-1, 0):
+        snake_direction = (1, 0)  # Rechts
+    last_input_direction = None # Eingabe verarbeitet
+
+    # Nächste Kopfposition berechnen
+    head_x, head_y = snake[0]
+    next_head_x = head_x + snake_direction[0]
+    next_head_y = head_y + snake_direction[1]
+    next_head = (next_head_x, next_head_y)
+
+    # Kollisionserkennung
+    # 1. Mit Wänden
+    if not (0 <= next_head_x < MATRIX_WIDTH and 0 <= next_head_y < MATRIX_HEIGHT):
+        game_over = True
+        return
+    # 2. Mit sich selbst (außer dem letzten Segment, falls der Apfel gefressen wird)
+    if next_head in snake and next_head != snake[-1]:
+        game_over = True
+        return
+
+    # Schlange bewegen: Neuen Kopf hinzufügen
+    snake.insert(0, next_head)
+
+    # Apfel gegessen?
+    if next_head == food_position:
+        score += 1
+        place_food() # Neuen Apfel platzieren
+    else:
+        snake.pop() # Letztes Segment entfernen (Schlange bewegt sich)
+```
+*******************************************************************************
+
+- What did you already know (and from where do you know it) and what did you have to learn to complete the project?
 
 ## 7. Code (process)
 
