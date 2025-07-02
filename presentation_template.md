@@ -308,9 +308,8 @@ if __name__ == "__main__":
             # Das Skript muss nach einem Game Over manuell neu gestartet werden,
             # um ein neues Spiel zu beginnen.
 ```
-*******************************************************************************
 
-                              {{1-2}}
+                              {{2}}
 *******************************************************************************
 
   - Important code snippets
@@ -319,8 +318,8 @@ if __name__ == "__main__":
 
   - What did you already know (and from where do you know it) and what did you have to learn to complete the project?
 
-                              {{2-3}}
 *******************************************************************************
+
 
 ## 7. Code (process)
 
