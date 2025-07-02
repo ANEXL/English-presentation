@@ -70,7 +70,9 @@ comment:  Try to write a short comment about
 
 ## 6. Code (Product)
 
-  - Big picture
+```python
+
+```
 
   - Important code snippets
 
