@@ -1,24 +1,21 @@
 <!--
-author:   Your Name
+author:   Anton Kalch, Alexander Felber, Tristan Kaestner
 
-email:    your@mail.org
+email:    anton.kalch@gmail.com
 
 version:  0.0.1
 
 language: en
 
-narrator: US English Female
-
-comment:  Try to write a short comment about
-          your course, multiline is also okay.
+comment:  english LED-box presentation
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/ANEXL/english-presentation/main/presentation_template.md)
 
-# Expectations for the presentation
+# Table of contents
 
 1. Object of desire
-2. What will audience get out of watching/listening to you? Why should they?
+2. Added value from this presentation
 3. What is the scope of your presentation (how much are you loading on to the audience)?
 4. What was your inspiration? What were your initial ideas? Was there anything you tried but abandoned?
 5. What background information, theory or technical details do your audience need to know to be able to understand your show/game?
@@ -47,7 +44,7 @@ comment:  Try to write a short comment about
   <img src="englisch.png" width="850"/>
 </p>
 
-## 2. What will audience get out of watching/listening to you? Why should they?
+## 2. Added value from this presentation
 
   - basic python knowledge
     
@@ -56,6 +53,8 @@ comment:  Try to write a short comment about
   - insights into game logic and design
 
 ## 3. What is the scope of your presentation (how much are you loading on to the audience)?
+
+  - snake history
 
   - explaining our code and the thoughts behind it
     
@@ -179,7 +178,22 @@ def title_screen():
 
     display.set_xy((6, 11), COLOR_Q)
     display.set_xy((6, 12), COLOR_Q)
-    display.set_xy((7, 11), COLOR_Q)
+    display.set_xy((6, 13), COLOR_Q)
+    display.set_xy((6, 14), COLOR_Q)
+    display.set_xy((7, 15), COLOR_Q)
+    display.set_xy((8, 15), COLOR_Q)
+    display.set_xy((9, 15), COLOR_Q)
+    display.set_xy((9, 13), COLOR_Q)
+    display.set_xy((10, 14), COLOR_Q)
+    display.set_xy((11, 15), COLOR_Q)
+    display.set_xy((11, 13), COLOR_Q)
+    display.set_xy((11, 12), COLOR_Q)
+    display.set_xy((11, 11), COLOR_Q)
+    display.set_xy((11, 10), COLOR_Q)
+    display.set_xy((10, 10), COLOR_Q)
+    display.set_xy((9, 10), COLOR_Q)
+    display.set_xy((8, 10), COLOR_Q)
+    display.set_xy((7, 10), COLOR_Q)
 
     display.show() # Matrix aktualisieren
     time.sleep(2) # Kurze Pause für den Titelbildschirm
