@@ -79,42 +79,42 @@ from ulib import remote, display
 import time
 import random
 
-# --- Spielkonstanten ---
+# --- Game Constants ---
 MATRIX_WIDTH = 16
 MATRIX_HEIGHT = 16
-GAME_SPEED = 0.2  # Sekunden pro Frame (kleiner = schneller)
+GAME_SPEED = 0.2  # Seconds per frame (smaller is faster)
 
-# Farben (R, G, B)
-COLOR_SNAKE = (0, 20, 0)   # Grün
-COLOR_FOOD = (20, 0, 0)    # Rot
-COLOR_EMPTY = (0, 0, 0)     # Schwarz (Pixel aus)
-COLOR_GAME_OVER = (10, 0, 0) # dunkelrot für Game Over
-COLOR_Q = (255, 255, 255) # Weiss für Q auf dem Titelbildschirm
+# Colors (R, G, B)
+COLOR_SNAKE = (0, 20, 0)      # Green
+COLOR_FOOD = (20, 0, 0)       # Red
+COLOR_EMPTY = (0, 0, 0)       # Black (pixel off)
+COLOR_GAME_OVER = (10, 0, 0)  # Dark red for Game Over
+COLOR_Q = (255, 255, 255)     # White for 'Q' on the title screen
 
-# --- Globale Spielvariablen ---
-snake = [] # Liste der (x,y) Segmente der Schlange
-snake_direction = (1, 0) # Aktuelle Bewegungsrichtung (dx, dy), Standard: rechts
-food_position = None     # (x,y) Position des Apfels
-game_over = False        # Spielstatus
-score = 0                # Spielstand (wird nicht angezeigt, aber intern gezählt)
-last_input_direction = None # Speichert die letzte empfangene Richtung von PC
-start = False # Flag, ob das Spiel gestartet wurde
+# --- Global Game Variables ---
+snake = []                   # List of (x,y) segments for the snake
+snake_direction = (1, 0)     # Current movement direction (dx, dy), default: right
+food_position = None         # (x,y) position of the apple
+game_over = False            # Game status
+score = 0                    # Score (not displayed, but counted internally)
+last_input_direction = None  # Stores the last received direction from the PC
+start_game = False           # Flag to check if the game has started
 
-# --- Initialisierung des Spiels ---
+# --- Game Initialization ---
 def initialize_game():
     global snake, snake_direction, food_position, game_over, score
-    snake = [(MATRIX_WIDTH // 2, MATRIX_HEIGHT // 2)] # Start in der Mitte
-    snake_direction = (1, 0) # Startet nach rechts
+    snake = [(MATRIX_WIDTH // 2, MATRIX_HEIGHT // 2)] # Start in the middle
+    snake_direction = (1, 0) # Start moving to the right
     food_position = None
     game_over = False
     score = 0
-    place_food() # Ersten Apfel platzieren
-    title_screen() # Titelbildschirm anzeigen
+    place_food()      # Place the first apple
+    title_screen()    # Display the title screen
     
 def title_screen():
-    """Zeigt den Titelbildschirm an."""
-    #PUSH Q
-    display.clear() # Matrix leeren
+    """Displays the title screen."""
+    # PUSH Q
+    display.clear() # Clear matrix
     display.set_xy((3, 2), COLOR_FOOD)
     display.set_xy((3, 3), COLOR_FOOD)
     display.set_xy((4, 2), COLOR_FOOD)
@@ -192,83 +192,83 @@ def title_screen():
     display.set_xy((8, 10), COLOR_Q)
     display.set_xy((7, 10), COLOR_Q)
 
-    display.show() # Matrix aktualisieren
-    time.sleep(2) # Kurze Pause für den Titelbildschirm
+    display.show() # Update matrix
+    time.sleep(2) # Short pause for the title screen
 
 def place_food():
-    """Platziert den Apfel an einer zufälligen, freien Stelle."""
+    """Places the apple at a random, unoccupied spot."""
     global food_position
     while True:
         x = random.randint(0, MATRIX_WIDTH - 1)
         y = random.randint(0, MATRIX_HEIGHT - 1)
-        if (x, y) not in snake: # Stelle darf nicht von Schlange belegt sein
+        if (x, y) not in snake: # Spot must not be occupied by the snake
             food_position = (x, y)
             break
 
 def draw_game_state():
-    """Zeichnet den aktuellen Spielzustand auf die LED-Matrix."""
-    # Zuerst alles leeren
+    """Draws the current game state on the LED matrix."""
+    # First, clear everything
     for x_clear in range(MATRIX_WIDTH):
         for y_clear in range(MATRIX_HEIGHT):
             display.set_xy((x_clear, y_clear), COLOR_EMPTY)
 
-    # Schlange zeichnen
+    # Draw snake
     for segment in snake:
         display.set_xy(segment, COLOR_SNAKE)
 
-    # Apfel zeichnen
+    # Draw apple
     if food_position:
         display.set_xy(food_position, COLOR_FOOD)
 
-    display.show() # Matrix aktualisieren
+    display.show() # Update matrix
 
 def update_game_logic():
-    """Aktualisiert die Spiellogik für einen Frame."""
+    """Updates the game logic for one frame."""
     global snake, snake_direction, food_position, game_over, score, last_input_direction
 
     if game_over:
         return
 
-    # Richtung basierend auf letzter Tasteneingabe anpassen
-    # Verhindert sofortiges 180-Grad-Drehen in sich selbst
+    # Adjust direction based on the last key input
+    # Prevents an immediate 180-degree turn into itself
     if last_input_direction == "W" and snake_direction != (0, 1):
-        snake_direction = (0, -1) # Hoch
+        snake_direction = (0, -1) # Up
     elif last_input_direction == "S" and snake_direction != (0, -1):
-        snake_direction = (0, 1)  # Runter
+        snake_direction = (0, 1)  # Down
     elif last_input_direction == "A" and snake_direction != (1, 0):
-        snake_direction = (-1, 0) # Links
+        snake_direction = (-1, 0) # Left
     elif last_input_direction == "D" and snake_direction != (-1, 0):
-        snake_direction = (1, 0)  # Rechts
-    last_input_direction = None # Eingabe verarbeitet
+        snake_direction = (1, 0)  # Right
+    last_input_direction = None # Input has been processed
 
-    # Nächste Kopfposition berechnen
+    # Calculate the next head position
     head_x, head_y = snake[0]
     next_head_x = head_x + snake_direction[0]
     next_head_y = head_y + snake_direction[1]
     next_head = (next_head_x, next_head_y)
 
-    # Kollisionserkennung
-    # 1. Mit Wänden
+    # Collision detection
+    # 1. With walls
     if not (0 <= next_head_x < MATRIX_WIDTH and 0 <= next_head_y < MATRIX_HEIGHT):
         game_over = True
         return
-    # 2. Mit sich selbst (außer dem letzten Segment, falls der Apfel gefressen wird)
+    # 2. With itself
     if next_head in snake and next_head != snake[-1]:
         game_over = True
         return
 
-    # Schlange bewegen: Neuen Kopf hinzufügen
+    # Move snake: Add a new head
     snake.insert(0, next_head)
 
-    # Apfel gegessen?
+    # Was the apple eaten?
     if next_head == food_position:
         score += 1
-        place_food() # Neuen Apfel platzieren
+        place_food() # Place a new apple
     else:
-        snake.pop() # Letztes Segment entfernen (Schlange bewegt sich)
+        snake.pop() # Remove the last segment (the snake moves)
 
-# --- Remote-Steuerfunktionen (werden von ulib aufgerufen) ---
-# Diese Funktionen setzen nur die gewünschte Richtung
+# --- Remote control functions (called by ulib) ---
+# These functions only set the desired direction
 def remote_left(c):
     global last_input_direction
     last_input_direction = "A"
@@ -285,12 +285,11 @@ def remote_down(c):
     global last_input_direction
     last_input_direction = "S"
 
-def remote_start(c):
-    global start
-    start = True
+def remote_q_pressed(c):
+    global start_game
+    start_game = True
 
-# --- Tastenbindungen und Listener starten ---
-# Der 'print' Befehl für bind_all wurde entfernt.
+# --- Key bindings and listener start ---
 remote.bind_key("A", remote_left)
 remote.bind_key("D", remote_right)
 remote.bind_key("W", remote_up)
@@ -299,31 +298,30 @@ remote.bind_key("LEFT", remote_left)
 remote.bind_key("RIGHT", remote_right)
 remote.bind_key("UP", remote_up)
 remote.bind_key("DOWN", remote_down)
-remote.bind_key("Q", remote_start) # Startet das Spiel
-remote.listen() # Startet den UDP-Server, der auf deinen PC-Eingaben horcht
+remote.bind_key("Q", remote_q_pressed) # Starts the game
+remote.listen() # Starts the UDP server to listen for your PC inputs
 
-# --- Hauptspielschleife ---
+# --- Main game loop ---
 if __name__ == "__main__":
-    initialize_game() # Spiel beim Start initialisieren
+    initialize_game() # Initialize the game at start
 
-    while not start:
-        
+    while not start_game:
         time.sleep(0.1)
 
     while True:
         if not game_over:
-            update_game_logic() # Spiellogik aktualisieren
-            draw_game_state()   # Spiel auf Matrix zeichnen
-            time.sleep(GAME_SPEED) # Wartezeit für Spielgeschwindigkeit
+            update_game_logic()   # Update game logic
+            draw_game_state()     # Draw game on matrix
+            time.sleep(GAME_SPEED) # Wait time for game speed
         else:
-            # Spielende-Anzeige (blinkendes Game Over)
+            # Game over display (blinking)
             for x_go in range(MATRIX_WIDTH):
                 for y_go in range(MATRIX_HEIGHT):
                     display.set_xy((x_go, y_go), COLOR_GAME_OVER if int(time.time() * 2) % 2 == 0 else COLOR_EMPTY)
             display.show()
-            time.sleep(0.5) # Langsamer blinken
-            # Das Skript muss nach einem Game Over manuell neu gestartet werden,
-            # um ein neues Spiel zu beginnen.
+            time.sleep(0.5) # Slower blinking
+            # The script must be manually restarted after a Game Over
+            # to start a new game.
 ```
 *******************************************************************************
 
@@ -332,13 +330,13 @@ if __name__ == "__main__":
 ```python
 def initialize_game():
     global snake, snake_direction, food_position, game_over, score
-    snake = [(MATRIX_WIDTH // 2, MATRIX_HEIGHT // 2)] # Start in der Mitte
-    snake_direction = (1, 0) # Startet nach rechts
+    snake = [(MATRIX_WIDTH // 2, MATRIX_HEIGHT // 2)] # Start in the middle
+    snake_direction = (1, 0) # Start moving to the right
     food_position = None
     game_over = False
     score = 0
-    place_food() # Ersten Apfel platzieren
-    title_screen() # Titelbildschirm anzeigen
+    place_food()      # Place the first apple
+    title_screen()    # Display the title screen
 ```
 *******************************************************************************
 
@@ -346,12 +344,12 @@ def initialize_game():
 *******************************************************************************
 ```python
 def place_food():
-    """Platziert den Apfel an einer zufälligen, freien Stelle."""
+    """Places the apple at a random, unoccupied spot."""
     global food_position
     while True:
         x = random.randint(0, MATRIX_WIDTH - 1)
         y = random.randint(0, MATRIX_HEIGHT - 1)
-        if (x, y) not in snake: # Stelle darf nicht von Schlange belegt sein
+        if (x, y) not in snake: # Spot must not be occupied by the snake
             food_position = (x, y)
             break
 ```
@@ -361,21 +359,21 @@ def place_food():
 *******************************************************************************
 ```python
 def draw_game_state():
-    """Zeichnet den aktuellen Spielzustand auf die LED-Matrix."""
-    # Zuerst alles leeren
+    """Draws the current game state on the LED matrix."""
+    # First, clear everything
     for x_clear in range(MATRIX_WIDTH):
         for y_clear in range(MATRIX_HEIGHT):
             display.set_xy((x_clear, y_clear), COLOR_EMPTY)
 
-    # Schlange zeichnen
+    # Draw snake
     for segment in snake:
         display.set_xy(segment, COLOR_SNAKE)
 
-    # Apfel zeichnen
+    # Draw apple
     if food_position:
         display.set_xy(food_position, COLOR_FOOD)
 
-    display.show() # Matrix aktualisieren
+    display.show() # Update matrix
 ```
 *******************************************************************************
 
@@ -383,49 +381,49 @@ def draw_game_state():
 *******************************************************************************
 ```python
 def update_game_logic():
-    """Aktualisiert die Spiellogik für einen Frame."""
+    """Updates the game logic for one frame."""
     global snake, snake_direction, food_position, game_over, score, last_input_direction
 
     if game_over:
         return
 
-    # Richtung basierend auf letzter Tasteneingabe anpassen
-    # Verhindert sofortiges 180-Grad-Drehen in sich selbst
+    # Adjust direction based on the last key input
+    # Prevents an immediate 180-degree turn into itself
     if last_input_direction == "W" and snake_direction != (0, 1):
-        snake_direction = (0, -1) # Hoch
+        snake_direction = (0, -1) # Up
     elif last_input_direction == "S" and snake_direction != (0, -1):
-        snake_direction = (0, 1)  # Runter
+        snake_direction = (0, 1)  # Down
     elif last_input_direction == "A" and snake_direction != (1, 0):
-        snake_direction = (-1, 0) # Links
+        snake_direction = (-1, 0) # Left
     elif last_input_direction == "D" and snake_direction != (-1, 0):
-        snake_direction = (1, 0)  # Rechts
-    last_input_direction = None # Eingabe verarbeitet
+        snake_direction = (1, 0)  # Right
+    last_input_direction = None # Input has been processed
 
-    # Nächste Kopfposition berechnen
+    # Calculate the next head position
     head_x, head_y = snake[0]
     next_head_x = head_x + snake_direction[0]
     next_head_y = head_y + snake_direction[1]
     next_head = (next_head_x, next_head_y)
 
-    # Kollisionserkennung
-    # 1. Mit Wänden
+    # Collision detection
+    # 1. With walls
     if not (0 <= next_head_x < MATRIX_WIDTH and 0 <= next_head_y < MATRIX_HEIGHT):
         game_over = True
         return
-    # 2. Mit sich selbst (außer dem letzten Segment, falls der Apfel gefressen wird)
+    # 2. With itself
     if next_head in snake and next_head != snake[-1]:
         game_over = True
         return
 
-    # Schlange bewegen: Neuen Kopf hinzufügen
+    # Move snake: Add a new head
     snake.insert(0, next_head)
 
-    # Apfel gegessen?
+    # Was the apple eaten?
     if next_head == food_position:
         score += 1
-        place_food() # Neuen Apfel platzieren
+        place_food() # Place a new apple
     else:
-        snake.pop() # Letztes Segment entfernen (Schlange bewegt sich)
+        snake.pop() # Remove the last segment (the snake moves)
 ```
 *******************************************************************************
 
@@ -433,26 +431,25 @@ def update_game_logic():
 *******************************************************************************
 ```python
 if __name__ == "__main__":
-    initialize_game() # Spiel beim Start initialisieren
+    initialize_game() # Initialize the game at start
 
-    while not start:
-        
+    while not start_game:
         time.sleep(0.1)
 
     while True:
         if not game_over:
-            update_game_logic() # Spiellogik aktualisieren
-            draw_game_state()   # Spiel auf Matrix zeichnen
-            time.sleep(GAME_SPEED) # Wartezeit für Spielgeschwindigkeit
+            update_game_logic()   # Update game logic
+            draw_game_state()     # Draw game on matrix
+            time.sleep(GAME_SPEED) # Wait time for game speed
         else:
-            # Spielende-Anzeige (blinkendes Game Over)
+            # Game over display (blinking)
             for x_go in range(MATRIX_WIDTH):
                 for y_go in range(MATRIX_HEIGHT):
                     display.set_xy((x_go, y_go), COLOR_GAME_OVER if int(time.time() * 2) % 2 == 0 else COLOR_EMPTY)
             display.show()
-            time.sleep(0.5) # Langsamer blinken
-            # Das Skript muss nach einem Game Over manuell neu gestartet werden,
-            # um ein neues Spiel zu beginnen.
+            time.sleep(0.5) # Slower blinking
+            # The script must be manually restarted after a Game Over
+            # to start a new game.
 ```
 *******************************************************************************
 
