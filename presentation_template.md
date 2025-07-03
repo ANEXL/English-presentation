@@ -468,7 +468,7 @@ if __name__ == "__main__":
   1. Prototype in C#
   ```C#
   class Program
-{
+  {
     static void Main(string[] args)
     {
         Level myLevel = new Level(); // Level construction
@@ -532,7 +532,7 @@ if __name__ == "__main__":
         }
         
     }
-}
+  }
   ```
 *******************************************************************************
 
