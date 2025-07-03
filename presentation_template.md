@@ -51,7 +51,7 @@ comment:  english LED-box presentation
 
 ## 3. Scope of the presentation?
 
- * snake history
+ * brief snake history
     
  * explaining our code and the thoughts behind it
     
