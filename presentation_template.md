@@ -32,9 +32,8 @@ comment:  english LED-box presentation
   - What did you already know (and from where do you know it) and what did you have to learn to complete the project?
 
 8. The show/game. Demo and description
-9. Conclusion
-10. Reflection. What did we get from taking part in this challenge?
-11. Final thought/take-home message
+9. Conclusion. What did we get from taking part in this challenge?
+10. Final thought/take-home message
 
 ## 1. Object of desire
 
@@ -50,7 +49,7 @@ comment:  english LED-box presentation
     
   - insights into game logic and design
 
-## 3. What is the scope of your presentation (how much are you loading on to the audience)?
+## 3. Scope of the presentation?
 
   - snake history
 
@@ -58,19 +57,19 @@ comment:  english LED-box presentation
     
   - the problems we had along the way
 
-## 4. What was your inspiration? What were your initial ideas? Was there anything you tried but abandoned?
+## 4. Inspiration?
 
   - initial tetris idea was abandoned (after concerns from Bjoern)
     
   - inspiration from [onlinespiele-sammlung.de](onlinespiele-sammlung.de)
 
-## 5. What background information, theory or technical details do your audience need to know to be able to understand your show/game?
+## 5. Background Info / Technical Details?
 
   - basic programming knowledge
     
   - ability to read (optional)
 
-## 6. Code (Product)
+## 6. Code
 
                               {{1-2}}
 *******************************************************************************
@@ -457,7 +456,7 @@ if __name__ == "__main__":
 ```
 *******************************************************************************
 
-## 7. Code (process)
+## 7. Coding process
 
   - How did you code? Vibe? GitHub?
 
