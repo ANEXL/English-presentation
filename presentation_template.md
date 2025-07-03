@@ -16,22 +16,20 @@ comment:  english LED-box presentation
 
 1. Object of desire
 2. Added value from this presentation
-3. What is the scope of your presentation (how much are you loading on to the audience)?
-4. What was your inspiration? What were your initial ideas? Was there anything you tried but abandoned?
-5. What background information, theory or technical details do your audience need to know to be able to understand your show/game?
-6. Code (Product)
+3. Scope of the presentation
+4. Inspiration
+5. Background Info / Technical Details
+6. Code
 
   - Big picture
 
-  - Important code snippet
+  - Important code snippets
 
-  - Bug examples
-
-  - What did you already know (and from where do you know it) and what did you have to learn to complete the project?
-
-7. Code (process)
+7. Coding process
 
   - How did you code? Vibe? GitHub?
+
+  - What did you already know (and from where do you know it) and what did you have to learn to complete the project?
 
 8. The show/game. Demo and description
 9. Conclusion
@@ -458,8 +456,6 @@ if __name__ == "__main__":
             # um ein neues Spiel zu beginnen.
 ```
 *******************************************************************************
-
-- What did you already know (and from where do you know it) and what did you have to learn to complete the project?
 
 ## 7. Code (process)
 
