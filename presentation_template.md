@@ -45,7 +45,7 @@ comment:  english LED-box presentation
 
  * basic python knowledge
     
- * how to work with the ulib libraries
+ * how to work with libraries
     
  * insights into game logic and design
 
