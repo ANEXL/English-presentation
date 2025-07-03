@@ -592,7 +592,7 @@ if __name__ == "__main__":
 ## 8. The show/game. Demo and description
 
 <p align="center">
-  <img src="logo.png" width="850"/>
+  <img src="logo.png" width="600"/>
 </p>
 
 ## 9. Conclusion. What did we get from taking part in this challenge?
