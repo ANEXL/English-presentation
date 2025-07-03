@@ -463,7 +463,7 @@ if __name__ == "__main__":
 *******************************************************************************
   1. Prototype in C#
 
-  ```C#
+  ```
   class Program
   {
     static void Main(string[] args)
@@ -537,7 +537,7 @@ if __name__ == "__main__":
 *******************************************************************************
   2. First Python prototype with pygame library
 
-  ```python
+  ```
   def main():
     global richtung
     pygame.init()
