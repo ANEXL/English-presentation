@@ -457,13 +457,140 @@ if __name__ == "__main__":
 *******************************************************************************
 
 ## 7. Coding process
+  1. Prototype in C#
+  2. First Python prototype with pygame library
+  3. Final solution with our own functions
 
-  - How did you code? Vibe? GitHub?
+     - assited by Github Copilot
+     
+                              {{1-2}}
+*******************************************************************************
+  1. Prototype in C#
+  ```C#
+  class Program
+{
+    static void Main(string[] args)
+    {
+        Level myLevel = new Level(); // Level construction
+        Player myPlayer = new Player(); // Player construction
+
+        Thread thd1 = new Thread(new ThreadStart(Loop1));//Zwei parallele methoden initilaisieren
+        Thread thd2 = new Thread(new ThreadStart(Loop2));
+        Thread thd3 = new Thread(new ThreadStart(Loop3));
+
+        thd1.Start(); thd2.Start(); thd3.Start();
+        thd1.Join(); thd2.Join(); thd3.Join();
+
+        void Loop1()
+        {
+            myLevel.RefreshArea(myPlayer.headpos[0], myPlayer.headpos[1], myPlayer.tailpos, myPlayer.length);
+            //int s = 0;
+            while (true)
+            {
+                myPlayer.MoveTail();
+
+                switch (myPlayer.headdir)
+                {
+                    case 'd': myPlayer.headpos[1]++; break;
+                    case 'u': myPlayer.headpos[1]--; break;
+                    case 'l': myPlayer.headpos[0]--; break;
+                    case 'r': myPlayer.headpos[0]++; break;
+                }
+
+                    myPlayer.CollDet(myLevel.Area);
+               
+                myLevel.RefreshArea(myPlayer.headpos[0], myPlayer.headpos[1], myPlayer.tailpos, myPlayer.length);
+
+                Console.Clear();
+                myLevel.PrintArea(myLevel.Area);
+                System.Threading.Thread.Sleep(250);
+            }
+        }
+
+        void Loop2()
+        {
+            while (true)
+            {
+                switch (Console.ReadKey(true).Key)//checkt tatstatur input
+                {
+                    case ConsoleKey.UpArrow: myPlayer.headdir = 'u'; break;  //pfeiltatsen setzen richtung
+                    case ConsoleKey.DownArrow: myPlayer.headdir = 'd'; break;
+                    case ConsoleKey.LeftArrow: myPlayer.headdir = 'l'; break;
+                    case ConsoleKey.RightArrow: myPlayer.headdir = 'r'; break;
+                    case ConsoleKey.Escape: Environment.Exit(0); break;
+                }
+            }
+        }
+        
+        void Loop3()
+        {
+            while (true)
+            {
+                System.Threading.Thread.Sleep(1000);
+                myPlayer.length++;
+            }
+        }
+        
+    }
+}
+  ```
+*******************************************************************************
+
+                              {{2-3}}
+*******************************************************************************
+  2. First Python prototype with pygame library
+  ```python
+  def main():
+    global richtung
+    pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.display.set_caption("Snake")
+    clock = pygame.time.Clock()
+
+    snake_position = [(5, 5), (4, 5), (3, 5)]
+    richtung = (1, 0)
+    apple_position = äpfel_generieren(snake_position, (GRID_WIDTH, GRID_HEIGHT))
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            richtung = steuerung_schlange(event, richtung)
+
+        # Bewegung
+        new_head = (snake_position[0][0] + richtung[0], snake_position[0][1] + richtung[1])
+        snake_position.insert(0, new_head)
+
+        # Apfel gegessen?
+        if new_head == apple_position:
+            apple_position = äpfel_generieren(snake_position, (GRID_WIDTH, GRID_HEIGHT))
+        else:
+            snake_position.pop()
+
+        if kollision_pruefung(snake_position, (GRID_WIDTH, GRID_HEIGHT)):
+            running = False
+
+        # Zeichnen mit pygame
+        screen.fill((0, 0, 0))
+        zeichne_schlange(screen, snake_position)
+        zeichne_apfel(screen, apple_position)
+        pygame.display.flip()
+        clock.tick(10)
+
+        # Zeichnen auf der LED-Matrix
+        display.fill((0, 0, 0))
+        for segment in snake_position:
+            display.set_xy(segment[0], segment[1], (0, 255, 0)) 
+        display.set_xy(apple_position, (255, 0, 0))
+        display.show()
+
+    pygame.quit()
+  ```
+*******************************************************************************
 
 ## 8. The show/game. Demo and description
 
-## 9. Conclusion
+## 9. Conclusion. What did we get from taking part in this challenge?
 
-## 10. Reflection. What did we get from taking part in this challenge?
-
-## 11. Final thought/take-home message
+## 10. Final thought/take-home message
