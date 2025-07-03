@@ -605,4 +605,6 @@ if __name__ == "__main__":
    
 ## 10. Final thought/take-home message
 
+ * It's easier than it looks
+
  
