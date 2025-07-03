@@ -50,22 +50,27 @@ comment:  Try to write a short comment about
 ## 2. What will audience get out of watching/listening to you? Why should they?
 
   - basic python knowledge
+    
   - how to work with the ulib libraries
+    
   - insights into game logic and design
 
 ## 3. What is the scope of your presentation (how much are you loading on to the audience)?
 
   - explaining our code and the thoughts behind it
+    
   - the problems we had along the way
 
 ## 4. What was your inspiration? What were your initial ideas? Was there anything you tried but abandoned?
 
   - initial tetris idea was abandoned (after concerns from Bjoern)
+    
   - inspiration from [onlinespiele-sammlung.de](onlinespiele-sammlung.de)
 
 ## 5. What background information, theory or technical details do your audience need to know to be able to understand your show/game?
 
   - basic programming knowledge
+    
   - ability to read (optional)
 
 ## 6. Code (Product)
