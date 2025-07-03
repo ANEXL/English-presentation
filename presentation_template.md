@@ -583,6 +583,16 @@ if __name__ == "__main__":
 
 ## 8. The show/game. Demo and description
 
+<p align="center">
+  <img src="logo.png" width="850"/>
+</p>
+
 ## 9. Conclusion. What did we get from taking part in this challenge?
 
+ * training to work as a team
+ * new Python skills
+ * learned to work with inputs from remote controllers
+   
 ## 10. Final thought/take-home message
+
+ 
