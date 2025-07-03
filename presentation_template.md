@@ -21,15 +21,15 @@ comment:  english LED-box presentation
 5. Background Info / Technical Details
 6. Code
 
-  * Big picture
+ * Big picture
   
-  * Important code snippets
+ * Important code snippets
 
 7. Coding process
 
-  * How did you code? Vibe? GitHub?
+ * How did you code? Vibe? GitHub?
     
-  * What did you already know (and from where do you know it) and what did you have to learn to complete the project?
+ * What did you already know (and from where do you know it) and what did you have to learn to complete the project?
 
 8. The show/game. Demo and description
 9. Conclusion. What did we get from taking part in this challenge?
@@ -43,31 +43,31 @@ comment:  english LED-box presentation
 
 ## 2. Added value from this presentation
 
-  * basic python knowledge
+ * basic python knowledge
     
-  * how to work with the ulib libraries
+ * how to work with the ulib libraries
     
-  * insights into game logic and design
+ * insights into game logic and design
 
 ## 3. Scope of the presentation?
 
-  * snake history
+ * snake history
     
-  * explaining our code and the thoughts behind it
+ * explaining our code and the thoughts behind it
     
-  * the problems we had along the way
+ * the problems we had along the way
 
 ## 4. Inspiration?
 
-  * initial tetris idea was abandoned (after concerns from Bjoern
+ * initial tetris idea was abandoned (after concerns from Bjoern
     
-  * inspiration from [onlinespiele-sammlung.de](onlinespiele-sammlung.de)
+ * inspiration from [onlinespiele-sammlung.de](onlinespiele-sammlung.de)
 
 ## 5. Background Info / Technical Details?
 
-  * basic programming knowledge
+ * basic programming knowledge
     
-  * ability to read (optional)
+ * ability to read (optional)
 
 ## 6. Code
 
