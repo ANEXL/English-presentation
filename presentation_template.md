@@ -358,28 +358,6 @@ def place_food():
                               {{4-5}}
 *******************************************************************************
 ```python
-def draw_game_state():
-    """Draws the current game state on the LED matrix."""
-    # First, clear everything
-    for x_clear in range(MATRIX_WIDTH):
-        for y_clear in range(MATRIX_HEIGHT):
-            display.set_xy((x_clear, y_clear), COLOR_EMPTY)
-
-    # Draw snake
-    for segment in snake:
-        display.set_xy(segment, COLOR_SNAKE)
-
-    # Draw apple
-    if food_position:
-        display.set_xy(food_position, COLOR_FOOD)
-
-    display.show() # Update matrix
-```
-*******************************************************************************
-
-                              {{5-6}}
-*******************************************************************************
-```python
 def update_game_logic():
     """Updates the game logic for one frame."""
     global snake, snake_direction, food_position, game_over, score, last_input_direction
@@ -424,6 +402,28 @@ def update_game_logic():
         place_food() # Place a new apple
     else:
         snake.pop() # Remove the last segment (the snake moves)
+```
+*******************************************************************************
+
+                              {{5-6}}
+*******************************************************************************
+```python
+def draw_game_state():
+    """Draws the current game state on the LED matrix."""
+    # First, clear everything
+    for x_clear in range(MATRIX_WIDTH):
+        for y_clear in range(MATRIX_HEIGHT):
+            display.set_xy((x_clear, y_clear), COLOR_EMPTY)
+
+    # Draw snake
+    for segment in snake:
+        display.set_xy(segment, COLOR_SNAKE)
+
+    # Draw apple
+    if food_position:
+        display.set_xy(food_position, COLOR_FOOD)
+
+    display.show() # Update matrix
 ```
 *******************************************************************************
 
