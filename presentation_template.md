@@ -49,7 +49,7 @@ comment:  english LED-box presentation
     
  * insights into game logic and design
 
-## 3. Scope of the presentation?
+## 3. Scope of the presentation
 
  * brief snake history
     
@@ -57,13 +57,13 @@ comment:  english LED-box presentation
     
  * the problems we had along the way
 
-## 4. Inspiration?
+## 4. Inspiration
 
  * initial tetris idea was abandoned (after concerns from Bjoern
     
  * inspiration from [onlinespiele-sammlung.de](onlinespiele-sammlung.de)
 
-## 5. Background Info / Technical Details?
+## 5. Background Knowledge
 
  * basic programming knowledge
     
